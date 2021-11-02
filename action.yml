@@ -1,0 +1,24 @@
+name: 'azblob-generate-static-index'
+description: 'Generate index.html for static web hosting on Azure Blob storage'
+author: 'fixpoint'
+branding:
+  icon: 'list'
+  color: 'gray-dark'
+inputs:
+  connection-string:
+    description: 'Connection string'
+    required: true
+  container:
+    description: 'Container name'
+    required: false
+    default: '$web'
+  prefix:
+    description: 'Prefix for index.html'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.connection-string }}
+    - ${{ inputs.container }}
+    - ${{ inputs.prefix }}

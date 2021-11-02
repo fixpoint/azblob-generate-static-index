@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 4em);
+        max-width: 80em;
+        margin: 2em auto;
+      }
+      main {
+        flex: 1;
+      }
+      footer {
+        font-size: small;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <table>
+        <tr>
+          <th>Filename</th>
+          <th>MD5</th>
+          <th>Content length</th>
+          <th>Creation time</th>
+          <th>Last modified</th>
+        </tr>
+        {{#items}}
+        <tr>
+          <td>
+            <a href="./{{ name }}" class="filename">
+              {{ name }}
+            </a>
+          </td>
+          <td><code class="md5">{{ properties.contentSettings.contentMd5 }}<code></td>
+          <td class="content-length">{{ properties.contentLength }} bytes</td>
+          <td class="creation-time">{{ properties.creationTime }}</td>
+          <td class="last-modified">{{ properties.lastModified }}</td>
+        </tr>
+        {{/items}}
+      </table>
+    </main>
+    <footer>
+      An index page powered by <a href="https://github.com/fixpoint/azblob-generate-static-index">fixpoint/azblob-generate-static-index</a>
+    </footer>
+  </body>
+</html>
