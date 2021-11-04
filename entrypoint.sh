@@ -3,7 +3,7 @@ az storage blob list \
   --connection-string $1 \
   --container-name $2 \
   --prefix $3 \
-  | jq -r 'sort_by(.properties.lastModified) | reverse | {"items": map(.) }' \
+  | jq -r '{"items": [sort_by(.properties.lastModified) | reverse | .[] | select(.name | endswith("/index.html") | not)] }' \
   | mustache /index.html.mustache \
   > index.html
 az storage blob upload \
