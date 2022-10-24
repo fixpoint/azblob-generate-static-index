@@ -1,4 +1,7 @@
-#!/bin/sh -l
+#!/bin/sh
+
+set -Cue
+
 az storage blob list \
   --connection-string $1 \
   --container-name $2 \
