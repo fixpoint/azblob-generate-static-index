@@ -27,7 +27,7 @@ fi
 az storage blob list \
   --connection-string $CONTAINER_STRING \
   --container-name $CONTAINER_NAME \
-  --prefix $PREFIX \
+  --prefix $PREFIX/ \
   | jq -r '{"items": [sort_by(.properties.lastModified) | reverse | .[] | select(.name | endswith("/index.html") | not)] }' \
   | mustache /index.html.mustache \
   > index.html
