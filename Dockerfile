@@ -12,7 +12,7 @@ FROM mcr.microsoft.com/azure-cli
 RUN apk --no-cache add jq
 
 COPY --from=mustache-downloader /usr/local/bin/mustache /usr/local/bin/mustache
-COPY entrypoint.sh /entrypoint.sh
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY index.html.mustache /index.html.mustache
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
