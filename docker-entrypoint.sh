@@ -2,6 +2,7 @@
 CONTAINER_STRING=$1
 CONTAINER_NAME=$2
 PREFIX=$3
+OVERWRITE=$4
 
 set -Cue
 
@@ -18,6 +19,11 @@ if [[ -z $PREFIX ]]; then
   exit 1
 fi
 
+OPTIONS=""
+if [[ $OVERWRITE == "true" ]]; then
+  OPTIONS=" --overwrite"
+fi
+
 az storage blob list \
   --connection-string $CONTAINER_STRING \
   --container-name $CONTAINER_NAME \
@@ -30,4 +36,5 @@ az storage blob upload \
   --connection-string $CONTAINER_STRING \
   --container-name $CONTAINER_NAME \
   --name $PREFIX/index.html \
-  --file index.html
+  --file index.html \
+  $OPTIONS

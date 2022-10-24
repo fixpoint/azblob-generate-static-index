@@ -14,6 +14,7 @@ steps:
     with:
       connection-string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
       prefix: some/directory
+      overwrite: true
 ```
 
 See [action.yml](./action.yml) for more detail.

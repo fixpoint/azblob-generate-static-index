@@ -15,6 +15,10 @@ inputs:
   prefix:
     description: "Prefix for index.html"
     required: true
+  overwrite:
+    description: "Allow to overwrite index.html (true/false)"
+    required: true
+    default: "false"
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -22,3 +26,4 @@ runs:
     - ${{ inputs.connection-string }}
     - ${{ inputs.container }}
     - ${{ inputs.prefix }}
+    - ${{ inputs.overwrite }}
