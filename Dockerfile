@@ -1,4 +1,4 @@
-FROM alpine as mustache-downloader
+FROM alpine AS mustache-downloader
 
 RUN apk --update add curl tar
 
@@ -8,8 +8,6 @@ RUN curl -sSL https://github.com/cbroglie/mustache/releases/download/v${MUSTACHE
  && mv mustache /usr/local/bin/mustache
 
 FROM mcr.microsoft.com/azure-cli
-
-RUN apk --no-cache add jq
 
 COPY --from=mustache-downloader /usr/local/bin/mustache /usr/local/bin/mustache
 COPY docker-entrypoint.sh /docker-entrypoint.sh
