@@ -1,0 +1,38 @@
+name: Test
+
+on: [push]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build .
+
+  test:
+    needs: check
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Basic usage
+        uses: ./
+        with:
+          connection-string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+          container: "azblob-generate-static-index"
+          prefix: "some"
+          overwrite: "true"
+
+      - name: Check if 'index.html' is correct
+        run: |
+          az storage blob download \
+            --connection-string "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" \
+            --container-name azblob-generate-static-index \
+            --name some/index.html \
+            --file index.html.downloaded
+
+          grep -q 'hello.txt' index.html.downloaded
+          grep -q 'world.txt' index.html.downloaded
