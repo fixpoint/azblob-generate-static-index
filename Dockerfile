@@ -2,8 +2,9 @@ FROM alpine AS mustache-downloader
 
 RUN apk --update add curl tar
 
-ARG MUSTACHE_VERSION=1.3.0
-RUN curl -sSL https://github.com/cbroglie/mustache/releases/download/v${MUSTACHE_VERSION}/mustache_${MUSTACHE_VERSION}_linux_amd64.tar.gz \
+ARG TARGETARCH
+ARG MUSTACHE_VERSION=1.4.0
+RUN curl -sSL https://github.com/cbroglie/mustache/releases/download/v${MUSTACHE_VERSION}/mustache_${MUSTACHE_VERSION}_linux_${TARGETARCH}.tar.gz \
   | tar xzf - \
  && mv mustache /usr/local/bin/mustache
 
